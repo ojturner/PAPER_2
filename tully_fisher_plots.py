@@ -304,8 +304,8 @@ def return_betas(mass,
     log_dynamical_mass_lower_error = 0.434 * (dynamical_mass_lower_error/dynamical_mass)
     dynamical_mass_ratio = dynamical_mass / np.power(10, mass)
     median_dynamical_mass_ratio = np.median(dynamical_mass_ratio)
-    median_dynamical_mass_ratio_lower_error = np.percentile(dynamical_mass_ratio, 16)
-    median_dynamical_mass_ratio_upper_error = np.percentile(dynamical_mass_ratio, 84)
+    median_dynamical_mass_ratio_lower_error = median_dynamical_mass_ratio - np.percentile(dynamical_mass_ratio, 16)
+    median_dynamical_mass_ratio_upper_error = np.percentile(dynamical_mass_ratio, 84) - median_dynamical_mass_ratio
     mean_dynamical_mass_ratio = np.mean(dynamical_mass_ratio)
     mean_dynamical_mass_ratio_error = np.std(dynamical_mass_ratio)/np.sqrt(len(dynamical_mass_ratio))
 
@@ -318,8 +318,8 @@ def return_betas(mass,
     log_dynamical_mass_with_sigma_lower_error = 0.434 * (dynamical_mass_with_sigma_lower_error/dynamical_mass_with_sigma)
     dynamical_mass_with_sigma_ratio = dynamical_mass_with_sigma / np.power(10, mass)
     median_dynamical_mass_with_sigma_ratio = np.median(dynamical_mass_with_sigma_ratio)
-    median_dynamical_mass_with_sigma_ratio_lower_error = np.percentile(dynamical_mass_with_sigma_ratio, 16)
-    median_dynamical_mass_with_sigma_ratio_upper_error = np.percentile(dynamical_mass_with_sigma_ratio, 84)
+    median_dynamical_mass_with_sigma_ratio_lower_error = median_dynamical_mass_with_sigma_ratio - np.percentile(dynamical_mass_with_sigma_ratio, 16)
+    median_dynamical_mass_with_sigma_ratio_upper_error = np.percentile(dynamical_mass_with_sigma_ratio, 84) - median_dynamical_mass_with_sigma_ratio
     mean_dynamical_mass_with_sigma_ratio = np.mean(dynamical_mass_with_sigma_ratio)
     mean_dynamical_mass_with_sigma_ratio_error = np.std(dynamical_mass_with_sigma_ratio)/np.sqrt(len(dynamical_mass_with_sigma_ratio))
 

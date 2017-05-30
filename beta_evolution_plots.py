@@ -2813,7 +2813,7 @@ plt.show()
 fig.savefig('/disk2/turner/disk1/turner/DATA/kmos_dynamics_paper_plots/PAPER_2_PLOTS/ang_mom_tot_evolution.png')
 plt.close('all')
 
-# make the dynamical mass evolution plots
+# DYNAMICAL MASS WITHOUT SIGMA PLOT
 
 lines = {'linestyle': 'None'}
 plt.rc('lines', **lines)
@@ -2845,7 +2845,7 @@ ax[0].tick_params(axis='both',
 
 [i.set_linewidth(4.0) for i in ax[0].spines.itervalues()]
 ax[0].set_xlim(-0.3,3.9)
-ax[0].set_ylim(-6.0,8.0)
+ax[0].set_ylim(-4.0,8.0)
 ax[0].minorticks_on()
 
 xa = ax[0].get_xaxis()
@@ -2870,7 +2870,7 @@ ax[1].tick_params(axis='both',
 
 [i.set_linewidth(4.0) for i in ax[1].spines.itervalues()]
 ax[1].set_xlim(-0.3,3.9)
-ax[1].set_ylim(-6.0,8.0)
+ax[1].set_ylim(-4.0,8.0)
 ax[1].minorticks_on()
 
 
@@ -2897,7 +2897,7 @@ ax[2].tick_params(axis='both',
 
 [i.set_linewidth(4.0) for i in ax[2].spines.itervalues()]
 ax[2].set_xlim(-0.3,3.9)
-ax[2].set_ylim(-6.0,8.0)
+ax[2].set_ylim(-4.0,8.0)
 ax[2].minorticks_on()
 
 
@@ -2923,7 +2923,6 @@ dynamo_dyn_ratio_with_sigma_upper_error_rot = table_dynamical_mass_evolution[5][
 p1_all = ax[0].errorbar(dynamo_redshift,
             dynamo_dyn_ratio_all,
             ecolor='cornflowerblue',
-            yerr=np.array([[dynamo_dyn_ratio_lower_error_all,dynamo_dyn_ratio_upper_error_all]]).T,
             marker='p',
             markersize=10,
             markerfacecolor='cornflowerblue',
@@ -2932,10 +2931,23 @@ p1_all = ax[0].errorbar(dynamo_redshift,
             capsize=2,
             elinewidth=2)
 
+ax[0].fill([dynamo_redshift-0.05,
+      dynamo_redshift+0.05,
+      dynamo_redshift+0.05,
+      dynamo_redshift-0.05],
+     [dynamo_dyn_ratio_all - dynamo_dyn_ratio_lower_error_all,
+      dynamo_dyn_ratio_all - dynamo_dyn_ratio_lower_error_all,
+      dynamo_dyn_ratio_all + dynamo_dyn_ratio_upper_error_all,
+      dynamo_dyn_ratio_all + dynamo_dyn_ratio_upper_error_all],
+     'cornflowerblue',
+      edgecolor='cornflowerblue',
+      lw=2,
+      alpha=0.25)
+
+
 p1_rot = ax[1].errorbar(dynamo_redshift,
             dynamo_dyn_ratio_rot,
             ecolor='cornflowerblue',
-            yerr=np.array([[dynamo_dyn_ratio_lower_error_rot,dynamo_dyn_ratio_lower_error_rot]]).T,
             marker='p',
             markersize=10,
             markerfacecolor='cornflowerblue',
@@ -2943,6 +2955,19 @@ p1_rot = ax[1].errorbar(dynamo_redshift,
             markeredgewidth=2,
             capsize=2,
             elinewidth=2)
+
+ax[1].fill([dynamo_redshift-0.05,
+      dynamo_redshift+0.05,
+      dynamo_redshift+0.05,
+      dynamo_redshift-0.05],
+     [dynamo_dyn_ratio_rot - dynamo_dyn_ratio_lower_error_rot,
+      dynamo_dyn_ratio_rot - dynamo_dyn_ratio_lower_error_rot,
+      dynamo_dyn_ratio_rot + dynamo_dyn_ratio_upper_error_rot,
+      dynamo_dyn_ratio_rot + dynamo_dyn_ratio_upper_error_rot],
+     'cornflowerblue',
+      edgecolor='cornflowerblue',
+      lw=2,
+      alpha=0.25)
 
 swinbank_low_redshift_redshift = table_dynamical_mass_evolution[3][1]
 swinbank_low_redshift_dyn_ratio_number_all = table_dynamical_mass_evolution[3][2]
@@ -2970,7 +2995,6 @@ swinbank_low_redshift_dyn_ratio_with_sigma_upper_error_disp = table_dynamical_ma
 p2_all = ax[0].errorbar(swinbank_low_redshift_redshift,
             swinbank_low_redshift_dyn_ratio_all,
             ecolor='navy',
-            yerr=np.array([[swinbank_low_redshift_dyn_ratio_lower_error_all,swinbank_low_redshift_dyn_ratio_upper_error_all]]).T,
             marker='^',
             markersize=10,
             markerfacecolor='none',
@@ -2978,11 +3002,23 @@ p2_all = ax[0].errorbar(swinbank_low_redshift_redshift,
             markeredgewidth=2,
             capsize=2,
             elinewidth=2)
+
+ax[0].fill([swinbank_low_redshift_redshift-0.05,
+      swinbank_low_redshift_redshift+0.05,
+      swinbank_low_redshift_redshift+0.05,
+      swinbank_low_redshift_redshift-0.05],
+     [swinbank_low_redshift_dyn_ratio_all - swinbank_low_redshift_dyn_ratio_lower_error_all,
+      swinbank_low_redshift_dyn_ratio_all - swinbank_low_redshift_dyn_ratio_lower_error_all,
+      swinbank_low_redshift_dyn_ratio_all + swinbank_low_redshift_dyn_ratio_upper_error_all,
+      swinbank_low_redshift_dyn_ratio_all + swinbank_low_redshift_dyn_ratio_upper_error_all],
+     'navy',
+      edgecolor='navy',
+      lw=2,
+      alpha=0.25)
 
 p2_rot = ax[1].errorbar(swinbank_low_redshift_redshift,
             swinbank_low_redshift_dyn_ratio_rot,
             ecolor='navy',
-            yerr=np.array([[swinbank_low_redshift_dyn_ratio_lower_error_rot,swinbank_low_redshift_dyn_ratio_upper_error_rot]]).T,
             marker='^',
             markersize=10,
             markerfacecolor='none',
@@ -2991,10 +3027,22 @@ p2_rot = ax[1].errorbar(swinbank_low_redshift_redshift,
             capsize=2,
             elinewidth=2)
 
+ax[1].fill([swinbank_low_redshift_redshift-0.05,
+      swinbank_low_redshift_redshift+0.05,
+      swinbank_low_redshift_redshift+0.05,
+      swinbank_low_redshift_redshift-0.05],
+     [swinbank_low_redshift_dyn_ratio_rot - swinbank_low_redshift_dyn_ratio_lower_error_rot,
+      swinbank_low_redshift_dyn_ratio_rot - swinbank_low_redshift_dyn_ratio_lower_error_rot,
+      swinbank_low_redshift_dyn_ratio_rot + swinbank_low_redshift_dyn_ratio_upper_error_rot,
+      swinbank_low_redshift_dyn_ratio_rot + swinbank_low_redshift_dyn_ratio_upper_error_rot],
+     'navy',
+      edgecolor='navy',
+      lw=2,
+      alpha=0.25)
+
 p1_disp = ax[2].errorbar(swinbank_low_redshift_redshift,
             swinbank_low_redshift_dyn_ratio_disp,
             ecolor='navy',
-            yerr=np.array([[swinbank_low_redshift_dyn_ratio_lower_error_disp,swinbank_low_redshift_dyn_ratio_upper_error_disp]]).T,
             marker='^',
             markersize=10,
             markerfacecolor='none',
@@ -3002,6 +3050,19 @@ p1_disp = ax[2].errorbar(swinbank_low_redshift_redshift,
             markeredgewidth=2,
             capsize=2,
             elinewidth=2)
+
+ax[2].fill([swinbank_low_redshift_redshift-0.05,
+      swinbank_low_redshift_redshift+0.05,
+      swinbank_low_redshift_redshift+0.05,
+      swinbank_low_redshift_redshift-0.05],
+     [swinbank_low_redshift_dyn_ratio_disp - swinbank_low_redshift_dyn_ratio_lower_error_disp,
+      swinbank_low_redshift_dyn_ratio_disp - swinbank_low_redshift_dyn_ratio_lower_error_disp,
+      swinbank_low_redshift_dyn_ratio_disp + swinbank_low_redshift_dyn_ratio_upper_error_disp,
+      swinbank_low_redshift_dyn_ratio_disp + swinbank_low_redshift_dyn_ratio_upper_error_disp],
+     'navy',
+      edgecolor='navy',
+      lw=2,
+      alpha=0.25)
 
 kross_redshift = table_dynamical_mass_evolution[6][1]
 kross_dyn_ratio_number_all = table_dynamical_mass_evolution[6][2]
@@ -3029,7 +3090,6 @@ kross_dyn_ratio_with_sigma_upper_error_disp = table_dynamical_mass_evolution[6][
 p2_all = ax[0].errorbar(kross_redshift,
             kross_dyn_ratio_all,
             ecolor='limegreen',
-            yerr=np.array([[kross_dyn_ratio_lower_error_all,kross_dyn_ratio_upper_error_all]]).T,
             marker='>',
             markersize=10,
             markerfacecolor='none',
@@ -3037,11 +3097,23 @@ p2_all = ax[0].errorbar(kross_redshift,
             markeredgewidth=2,
             capsize=2,
             elinewidth=2)
+
+ax[0].fill([kross_redshift-0.05,
+      kross_redshift+0.05,
+      kross_redshift+0.05,
+      kross_redshift-0.05],
+     [kross_dyn_ratio_all - kross_dyn_ratio_lower_error_all,
+      kross_dyn_ratio_all - kross_dyn_ratio_lower_error_all,
+      kross_dyn_ratio_all + kross_dyn_ratio_upper_error_all,
+      kross_dyn_ratio_all + kross_dyn_ratio_upper_error_all],
+     'limegreen',
+      edgecolor='limegreen',
+      lw=2,
+      alpha=0.25)
 
 p2_rot = ax[1].errorbar(kross_redshift,
             kross_dyn_ratio_rot,
             ecolor='limegreen',
-            yerr=np.array([[kross_dyn_ratio_lower_error_rot,kross_dyn_ratio_upper_error_rot]]).T,
             marker='>',
             markersize=10,
             markerfacecolor='none',
@@ -3050,10 +3122,22 @@ p2_rot = ax[1].errorbar(kross_redshift,
             capsize=2,
             elinewidth=2)
 
+ax[1].fill([kross_redshift-0.05,
+      kross_redshift+0.05,
+      kross_redshift+0.05,
+      kross_redshift-0.05],
+     [kross_dyn_ratio_rot - kross_dyn_ratio_lower_error_rot,
+      kross_dyn_ratio_rot - kross_dyn_ratio_lower_error_rot,
+      kross_dyn_ratio_rot + kross_dyn_ratio_upper_error_rot,
+      kross_dyn_ratio_rot + kross_dyn_ratio_upper_error_rot],
+     'limegreen',
+      edgecolor='limegreen',
+      lw=2,
+      alpha=0.25)
+
 p1_disp = ax[2].errorbar(kross_redshift,
             kross_dyn_ratio_disp,
             ecolor='limegreen',
-            yerr=np.array([[kross_dyn_ratio_lower_error_disp,kross_dyn_ratio_upper_error_disp]]).T,
             marker='>',
             markersize=10,
             markerfacecolor='none',
@@ -3061,6 +3145,19 @@ p1_disp = ax[2].errorbar(kross_redshift,
             markeredgewidth=2,
             capsize=2,
             elinewidth=2)
+
+ax[2].fill([kross_redshift-0.05,
+      kross_redshift+0.05,
+      kross_redshift+0.05,
+      kross_redshift-0.05],
+     [kross_dyn_ratio_disp - kross_dyn_ratio_lower_error_disp,
+      kross_dyn_ratio_disp - kross_dyn_ratio_lower_error_disp,
+      kross_dyn_ratio_disp + kross_dyn_ratio_upper_error_disp,
+      kross_dyn_ratio_disp + kross_dyn_ratio_upper_error_disp],
+     'limegreen',
+      edgecolor='limegreen',
+      lw=2,
+      alpha=0.25)
 
 massiv_redshift = table_dynamical_mass_evolution[7][1]
 massiv_dyn_ratio_number_all = table_dynamical_mass_evolution[7][2]
@@ -3088,7 +3185,6 @@ massiv_dyn_ratio_with_sigma_upper_error_disp = table_dynamical_mass_evolution[7]
 p2_all = ax[0].errorbar(massiv_redshift,
             massiv_dyn_ratio_all,
             ecolor='olive',
-            yerr=np.array([[massiv_dyn_ratio_lower_error_all,massiv_dyn_ratio_upper_error_all]]).T,
             marker='v',
             markersize=10,
             markerfacecolor='none',
@@ -3096,11 +3192,23 @@ p2_all = ax[0].errorbar(massiv_redshift,
             markeredgewidth=2,
             capsize=2,
             elinewidth=2)
+
+ax[0].fill([massiv_redshift-0.05,
+      massiv_redshift+0.05,
+      massiv_redshift+0.05,
+      massiv_redshift-0.05],
+     [massiv_dyn_ratio_all - massiv_dyn_ratio_lower_error_all,
+      massiv_dyn_ratio_all - massiv_dyn_ratio_lower_error_all,
+      massiv_dyn_ratio_all + massiv_dyn_ratio_upper_error_all,
+      massiv_dyn_ratio_all + massiv_dyn_ratio_upper_error_all],
+     'olive',
+      edgecolor='olive',
+      lw=2,
+      alpha=0.25)
 
 p2_rot = ax[1].errorbar(massiv_redshift,
             massiv_dyn_ratio_rot,
             ecolor='olive',
-            yerr=np.array([[massiv_dyn_ratio_lower_error_rot,massiv_dyn_ratio_upper_error_rot]]).T,
             marker='v',
             markersize=10,
             markerfacecolor='none',
@@ -3109,10 +3217,22 @@ p2_rot = ax[1].errorbar(massiv_redshift,
             capsize=2,
             elinewidth=2)
 
+ax[1].fill([massiv_redshift-0.05,
+      massiv_redshift+0.05,
+      massiv_redshift+0.05,
+      massiv_redshift-0.05],
+     [massiv_dyn_ratio_rot - massiv_dyn_ratio_lower_error_rot,
+      massiv_dyn_ratio_rot - massiv_dyn_ratio_lower_error_rot,
+      massiv_dyn_ratio_rot + massiv_dyn_ratio_upper_error_rot,
+      massiv_dyn_ratio_rot + massiv_dyn_ratio_upper_error_rot],
+     'olive',
+      edgecolor='olive',
+      lw=2,
+      alpha=0.25)
+
 p1_disp = ax[2].errorbar(massiv_redshift,
             massiv_dyn_ratio_disp,
             ecolor='olive',
-            yerr=np.array([[massiv_dyn_ratio_lower_error_disp,massiv_dyn_ratio_upper_error_disp]]).T,
             marker='v',
             markersize=10,
             markerfacecolor='none',
@@ -3120,6 +3240,19 @@ p1_disp = ax[2].errorbar(massiv_redshift,
             markeredgewidth=2,
             capsize=2,
             elinewidth=2)
+
+ax[2].fill([massiv_redshift-0.05,
+      massiv_redshift+0.05,
+      massiv_redshift+0.05,
+      massiv_redshift-0.05],
+     [massiv_dyn_ratio_disp - massiv_dyn_ratio_lower_error_disp,
+      massiv_dyn_ratio_disp - massiv_dyn_ratio_lower_error_disp,
+      massiv_dyn_ratio_disp + massiv_dyn_ratio_upper_error_disp,
+      massiv_dyn_ratio_disp + massiv_dyn_ratio_upper_error_disp],
+     'olive',
+      edgecolor='olive',
+      lw=2,
+      alpha=0.25)
 
 swinbank_high_redshift_redshift = table_dynamical_mass_evolution[4][1]
 swinbank_high_redshift_dyn_ratio_number_all = table_dynamical_mass_evolution[4][2]
@@ -3147,7 +3280,6 @@ swinbank_high_redshift_dyn_ratio_with_sigma_upper_error_disp = table_dynamical_m
 p5_all = ax[0].errorbar(swinbank_high_redshift_redshift,
             swinbank_high_redshift_dyn_ratio_all,
             ecolor='darkgreen',
-            yerr=np.array([[swinbank_high_redshift_dyn_ratio_error_all,swinbank_high_redshift_dyn_ratio_error_all]]).T,
             marker='^',
             markersize=10,
             markerfacecolor='none',
@@ -3155,11 +3287,23 @@ p5_all = ax[0].errorbar(swinbank_high_redshift_redshift,
             markeredgewidth=2,
             capsize=2,
             elinewidth=2)
+
+ax[0].fill([swinbank_high_redshift_redshift-0.05,
+      swinbank_high_redshift_redshift+0.05,
+      swinbank_high_redshift_redshift+0.05,
+      swinbank_high_redshift_redshift-0.05],
+     [swinbank_high_redshift_dyn_ratio_all - swinbank_high_redshift_dyn_ratio_lower_error_all,
+      swinbank_high_redshift_dyn_ratio_all - swinbank_high_redshift_dyn_ratio_lower_error_all,
+      swinbank_high_redshift_dyn_ratio_all + swinbank_high_redshift_dyn_ratio_upper_error_all,
+      swinbank_high_redshift_dyn_ratio_all + swinbank_high_redshift_dyn_ratio_upper_error_all],
+     'darkgreen',
+      edgecolor='darkgreen',
+      lw=2,
+      alpha=0.25)
 
 p5_rot = ax[1].errorbar(swinbank_high_redshift_redshift,
             swinbank_high_redshift_dyn_ratio_rot,
             ecolor='darkgreen',
-            yerr=np.array([[swinbank_high_redshift_dyn_ratio_error_rot,swinbank_high_redshift_dyn_ratio_error_rot]]).T,
             marker='^',
             markersize=10,
             markerfacecolor='none',
@@ -3167,11 +3311,23 @@ p5_rot = ax[1].errorbar(swinbank_high_redshift_redshift,
             markeredgewidth=2,
             capsize=2,
             elinewidth=2)
+
+ax[1].fill([swinbank_high_redshift_redshift-0.05,
+      swinbank_high_redshift_redshift+0.05,
+      swinbank_high_redshift_redshift+0.05,
+      swinbank_high_redshift_redshift-0.05],
+     [swinbank_high_redshift_dyn_ratio_rot - swinbank_high_redshift_dyn_ratio_lower_error_rot,
+      swinbank_high_redshift_dyn_ratio_rot - swinbank_high_redshift_dyn_ratio_lower_error_rot,
+      swinbank_high_redshift_dyn_ratio_rot + swinbank_high_redshift_dyn_ratio_upper_error_rot,
+      swinbank_high_redshift_dyn_ratio_rot + swinbank_high_redshift_dyn_ratio_upper_error_rot],
+     'darkgreen',
+      edgecolor='darkgreen',
+      lw=2,
+      alpha=0.25)
 
 p4_disp = ax[2].errorbar(swinbank_high_redshift_redshift,
             swinbank_high_redshift_dyn_ratio_disp,
             ecolor='darkgreen',
-            yerr=np.array([[swinbank_high_redshift_dyn_ratio_error_disp,swinbank_high_redshift_dyn_ratio_error_disp]]).T,
             marker='^',
             markersize=10,
             markerfacecolor='none',
@@ -3180,27 +3336,45 @@ p4_disp = ax[2].errorbar(swinbank_high_redshift_redshift,
             capsize=2,
             elinewidth=2)
 
+ax[2].fill([swinbank_high_redshift_redshift-0.05,
+      swinbank_high_redshift_redshift+0.05,
+      swinbank_high_redshift_redshift+0.05,
+      swinbank_high_redshift_redshift-0.05],
+     [swinbank_high_redshift_dyn_ratio_disp - swinbank_high_redshift_dyn_ratio_lower_error_disp,
+      swinbank_high_redshift_dyn_ratio_disp - swinbank_high_redshift_dyn_ratio_lower_error_disp,
+      swinbank_high_redshift_dyn_ratio_disp + swinbank_high_redshift_dyn_ratio_upper_error_disp,
+      swinbank_high_redshift_dyn_ratio_disp + swinbank_high_redshift_dyn_ratio_upper_error_disp],
+     'darkgreen',
+      edgecolor='darkgreen',
+      lw=2,
+      alpha=0.25)
+
 sigma_low_redshift_redshift = table_dynamical_mass_evolution[1][1]
 sigma_low_redshift_dyn_ratio_number_all = table_dynamical_mass_evolution[1][2]
 sigma_low_redshift_dyn_ratio_all = table_dynamical_mass_evolution[1][3]
-sigma_low_redshift_dyn_ratio_error_all = table_dynamical_mass_evolution[1][4]
-sigma_low_redshift_dyn_ratio_with_sigma_all = table_dynamical_mass_evolution[1][5]
-sigma_low_redshift_dyn_ratio_with_sigma_error_all = table_dynamical_mass_evolution[1][6]
-sigma_low_redshift_dyn_ratio_number_rot = table_dynamical_mass_evolution[1][7]
-sigma_low_redshift_dyn_ratio_rot = table_dynamical_mass_evolution[1][8]
-sigma_low_redshift_dyn_ratio_error_rot = table_dynamical_mass_evolution[1][9]
-sigma_low_redshift_dyn_ratio_with_sigma_rot = table_dynamical_mass_evolution[1][10]
-sigma_low_redshift_dyn_ratio_with_sigma_error_rot = table_dynamical_mass_evolution[1][11]
-sigma_low_redshift_dyn_ratio_number_disp = table_dynamical_mass_evolution[1][12]
-sigma_low_redshift_dyn_ratio_disp = table_dynamical_mass_evolution[1][13]
-sigma_low_redshift_dyn_ratio_error_disp = table_dynamical_mass_evolution[1][14]
-sigma_low_redshift_dyn_ratio_with_sigma_disp = table_dynamical_mass_evolution[1][15]
-sigma_low_redshift_dyn_ratio_with_sigma_error_disp = table_dynamical_mass_evolution[1][16]
+sigma_low_redshift_dyn_ratio_lower_error_all = table_dynamical_mass_evolution[1][4]
+sigma_low_redshift_dyn_ratio_upper_error_all = table_dynamical_mass_evolution[1][5]
+sigma_low_redshift_dyn_ratio_with_sigma_all = table_dynamical_mass_evolution[1][6]
+sigma_low_redshift_dyn_ratio_with_sigma_lower_error_all = table_dynamical_mass_evolution[1][7]
+sigma_low_redshift_dyn_ratio_with_sigma_upper_error_all = table_dynamical_mass_evolution[1][8]
+sigma_low_redshift_dyn_ratio_number_rot = table_dynamical_mass_evolution[1][9]
+sigma_low_redshift_dyn_ratio_rot = table_dynamical_mass_evolution[1][10]
+sigma_low_redshift_dyn_ratio_lower_error_rot = table_dynamical_mass_evolution[1][11]
+sigma_low_redshift_dyn_ratio_upper_error_rot = table_dynamical_mass_evolution[1][12]
+sigma_low_redshift_dyn_ratio_with_sigma_rot = table_dynamical_mass_evolution[1][13]
+sigma_low_redshift_dyn_ratio_with_sigma_lower_error_rot = table_dynamical_mass_evolution[1][14]
+sigma_low_redshift_dyn_ratio_with_sigma_upper_error_rot = table_dynamical_mass_evolution[1][15]
+sigma_low_redshift_dyn_ratio_number_disp = table_dynamical_mass_evolution[1][16]
+sigma_low_redshift_dyn_ratio_disp = table_dynamical_mass_evolution[1][17]
+sigma_low_redshift_dyn_ratio_lower_error_disp = table_dynamical_mass_evolution[1][18]
+sigma_low_redshift_dyn_ratio_upper_error_disp = table_dynamical_mass_evolution[1][19]
+sigma_low_redshift_dyn_ratio_with_sigma_disp = table_dynamical_mass_evolution[1][20]
+sigma_low_redshift_dyn_ratio_with_sigma_lower_error_disp = table_dynamical_mass_evolution[1][21]
+sigma_low_redshift_dyn_ratio_with_sigma_upper_error_disp = table_dynamical_mass_evolution[1][22]
 
 ax[0].errorbar(sigma_low_redshift_redshift,
             sigma_low_redshift_dyn_ratio_all,
             ecolor='teal',
-            yerr=np.array([[sigma_low_redshift_dyn_ratio_error_all,sigma_low_redshift_dyn_ratio_error_all]]).T,
             marker='H',
             markersize=10,
             markerfacecolor='teal',
@@ -3209,11 +3383,23 @@ ax[0].errorbar(sigma_low_redshift_redshift,
             capsize=2,
             elinewidth=2,
             label=r'\textbf{10.1 - SIGMA (SIMONS+16)}')
+
+ax[0].fill([sigma_low_redshift_redshift-0.05,
+      sigma_low_redshift_redshift+0.05,
+      sigma_low_redshift_redshift+0.05,
+      sigma_low_redshift_redshift-0.05],
+     [sigma_low_redshift_dyn_ratio_all - sigma_low_redshift_dyn_ratio_lower_error_all,
+      sigma_low_redshift_dyn_ratio_all - sigma_low_redshift_dyn_ratio_lower_error_all,
+      sigma_low_redshift_dyn_ratio_all + sigma_low_redshift_dyn_ratio_upper_error_all,
+      sigma_low_redshift_dyn_ratio_all + sigma_low_redshift_dyn_ratio_upper_error_all],
+     'teal',
+      edgecolor='teal',
+      lw=2,
+      alpha=0.25)
 
 ax[1].errorbar(sigma_low_redshift_redshift,
             sigma_low_redshift_dyn_ratio_rot,
             ecolor='teal',
-            yerr=np.array([[sigma_low_redshift_dyn_ratio_error_rot,sigma_low_redshift_dyn_ratio_error_rot]]).T,
             marker='H',
             markersize=10,
             markerfacecolor='teal',
@@ -3222,11 +3408,23 @@ ax[1].errorbar(sigma_low_redshift_redshift,
             capsize=2,
             elinewidth=2,
             label=r'\textbf{10.1 - SIGMA (SIMONS+16)}')
+
+ax[1].fill([sigma_low_redshift_redshift-0.05,
+      sigma_low_redshift_redshift+0.05,
+      sigma_low_redshift_redshift+0.05,
+      sigma_low_redshift_redshift-0.05],
+     [sigma_low_redshift_dyn_ratio_rot - sigma_low_redshift_dyn_ratio_lower_error_rot,
+      sigma_low_redshift_dyn_ratio_rot - sigma_low_redshift_dyn_ratio_lower_error_rot,
+      sigma_low_redshift_dyn_ratio_rot + sigma_low_redshift_dyn_ratio_upper_error_rot,
+      sigma_low_redshift_dyn_ratio_rot + sigma_low_redshift_dyn_ratio_upper_error_rot],
+     'teal',
+      edgecolor='teal',
+      lw=2,
+      alpha=0.25)
 
 ax[2].errorbar(sigma_low_redshift_redshift,
             sigma_low_redshift_dyn_ratio_disp,
             ecolor='teal',
-            yerr=np.array([[sigma_low_redshift_dyn_ratio_error_disp,sigma_low_redshift_dyn_ratio_error_disp]]).T,
             marker='H',
             markersize=10,
             markerfacecolor='teal',
@@ -3236,22 +3434,38 @@ ax[2].errorbar(sigma_low_redshift_redshift,
             elinewidth=2,
             label=r'\textbf{10.1 - SIGMA (SIMONS+16)}')
 
+ax[2].fill([sigma_low_redshift_redshift-0.05,
+      sigma_low_redshift_redshift+0.05,
+      sigma_low_redshift_redshift+0.05,
+      sigma_low_redshift_redshift-0.05],
+     [sigma_low_redshift_dyn_ratio_disp - sigma_low_redshift_dyn_ratio_lower_error_disp,
+      sigma_low_redshift_dyn_ratio_disp - sigma_low_redshift_dyn_ratio_lower_error_disp,
+      sigma_low_redshift_dyn_ratio_disp + sigma_low_redshift_dyn_ratio_upper_error_disp,
+      sigma_low_redshift_dyn_ratio_disp + sigma_low_redshift_dyn_ratio_upper_error_disp],
+     'teal',
+      edgecolor='teal',
+      lw=2,
+      alpha=0.25)
+
 cresci_redshift = table_dynamical_mass_evolution[0][1]
 cresci_dyn_ratio_number_all = table_dynamical_mass_evolution[0][2]
 cresci_dyn_ratio_all = table_dynamical_mass_evolution[0][3]
-cresci_dyn_ratio_error_all = table_dynamical_mass_evolution[0][4]
-cresci_dyn_ratio_with_sigma_all = table_dynamical_mass_evolution[0][5]
-cresci_dyn_ratio_with_sigma_error_all = table_dynamical_mass_evolution[0][6]
+cresci_dyn_ratio_lower_error_all = table_dynamical_mass_evolution[0][4]
+cresci_dyn_ratio_upper_error_all = table_dynamical_mass_evolution[0][5]
+cresci_dyn_ratio_with_sigma_all = table_dynamical_mass_evolution[0][6]
+cresci_dyn_ratio_with_sigma_lower_error_all = table_dynamical_mass_evolution[0][7]
+cresci_dyn_ratio_with_sigma_upper_error_all = table_dynamical_mass_evolution[0][8]
 cresci_dyn_ratio_number_rot = table_dynamical_mass_evolution[0][2]
 cresci_dyn_ratio_rot = table_dynamical_mass_evolution[0][3]
-cresci_dyn_ratio_error_rot = table_dynamical_mass_evolution[0][4]
-cresci_dyn_ratio_with_sigma_rot = table_dynamical_mass_evolution[0][5]
-cresci_dyn_ratio_with_sigma_error_rot = table_dynamical_mass_evolution[0][6]
+cresci_dyn_ratio_lower_error_rot = table_dynamical_mass_evolution[0][4]
+cresci_dyn_ratio_upper_error_rot = table_dynamical_mass_evolution[0][5]
+cresci_dyn_ratio_with_sigma_rot = table_dynamical_mass_evolution[0][6]
+cresci_dyn_ratio_with_sigma_lower_error_rot = table_dynamical_mass_evolution[0][7]
+cresci_dyn_ratio_with_sigma_upper_error_rot = table_dynamical_mass_evolution[0][8]
 
 ax[0].errorbar(cresci_redshift,
             cresci_dyn_ratio_all,
             ecolor='darkorange',
-            yerr=np.array([[cresci_dyn_ratio_error_all,cresci_dyn_ratio_error_all]]).T,
             marker='*',
             markersize=15,
             markerfacecolor='darkorange',
@@ -3260,11 +3474,23 @@ ax[0].errorbar(cresci_redshift,
             capsize=2,
             elinewidth=2,
             label=r'\textbf{10.6 - SINS (Cresci+09)}')
+
+ax[0].fill([cresci_redshift-0.05,
+      cresci_redshift+0.05,
+      cresci_redshift+0.05,
+      cresci_redshift-0.05],
+     [cresci_dyn_ratio_all - cresci_dyn_ratio_lower_error_all,
+      cresci_dyn_ratio_all - cresci_dyn_ratio_lower_error_all,
+      cresci_dyn_ratio_all + cresci_dyn_ratio_upper_error_all,
+      cresci_dyn_ratio_all + cresci_dyn_ratio_upper_error_all],
+     'darkorange',
+      edgecolor='darkorange',
+      lw=2,
+      alpha=0.25)
 
 ax[1].errorbar(cresci_redshift,
             cresci_dyn_ratio_rot,
             ecolor='darkorange',
-            yerr=np.array([[cresci_dyn_ratio_error_rot,cresci_dyn_ratio_error_rot]]).T,
             marker='*',
             markersize=15,
             markerfacecolor='darkorange',
@@ -3274,27 +3500,45 @@ ax[1].errorbar(cresci_redshift,
             elinewidth=2,
             label=r'\textbf{10.6 - SINS (Cresci+09)}')
 
+ax[1].fill([cresci_redshift-0.05,
+      cresci_redshift+0.05,
+      cresci_redshift+0.05,
+      cresci_redshift-0.05],
+     [cresci_dyn_ratio_rot - cresci_dyn_ratio_lower_error_rot,
+      cresci_dyn_ratio_rot - cresci_dyn_ratio_lower_error_rot,
+      cresci_dyn_ratio_rot + cresci_dyn_ratio_upper_error_rot,
+      cresci_dyn_ratio_rot + cresci_dyn_ratio_upper_error_rot],
+     'darkorange',
+      edgecolor='darkorange',
+      lw=2,
+      alpha=0.25)
+
 sigma_high_redshift_redshift = table_dynamical_mass_evolution[2][1]
 sigma_high_redshift_dyn_ratio_number_all = table_dynamical_mass_evolution[2][2]
 sigma_high_redshift_dyn_ratio_all = table_dynamical_mass_evolution[2][3]
-sigma_high_redshift_dyn_ratio_error_all = table_dynamical_mass_evolution[2][4]
-sigma_high_redshift_dyn_ratio_with_sigma_all = table_dynamical_mass_evolution[2][5]
-sigma_high_redshift_dyn_ratio_with_sigma_error_all = table_dynamical_mass_evolution[2][6]
-sigma_high_redshift_dyn_ratio_number_rot = table_dynamical_mass_evolution[2][7]
-sigma_high_redshift_dyn_ratio_rot = table_dynamical_mass_evolution[2][8]
-sigma_high_redshift_dyn_ratio_error_rot = table_dynamical_mass_evolution[2][9]
-sigma_high_redshift_dyn_ratio_with_sigma_rot = table_dynamical_mass_evolution[2][10]
-sigma_high_redshift_dyn_ratio_with_sigma_error_rot = table_dynamical_mass_evolution[2][11]
-sigma_high_redshift_dyn_ratio_number_disp = table_dynamical_mass_evolution[2][12]
-sigma_high_redshift_dyn_ratio_disp = table_dynamical_mass_evolution[2][13]
-sigma_high_redshift_dyn_ratio_error_disp = table_dynamical_mass_evolution[2][14]
-sigma_high_redshift_dyn_ratio_with_sigma_disp = table_dynamical_mass_evolution[2][15]
-sigma_high_redshift_dyn_ratio_with_sigma_error_disp = table_dynamical_mass_evolution[2][16]
+sigma_high_redshift_dyn_ratio_lower_error_all = table_dynamical_mass_evolution[2][4]
+sigma_high_redshift_dyn_ratio_upper_error_all = table_dynamical_mass_evolution[2][5]
+sigma_high_redshift_dyn_ratio_with_sigma_all = table_dynamical_mass_evolution[2][6]
+sigma_high_redshift_dyn_ratio_with_sigma_lower_error_all = table_dynamical_mass_evolution[2][7]
+sigma_high_redshift_dyn_ratio_with_sigma_upper_error_all = table_dynamical_mass_evolution[2][8]
+sigma_high_redshift_dyn_ratio_number_rot = table_dynamical_mass_evolution[2][9]
+sigma_high_redshift_dyn_ratio_rot = table_dynamical_mass_evolution[2][10]
+sigma_high_redshift_dyn_ratio_lower_error_rot = table_dynamical_mass_evolution[2][11]
+sigma_high_redshift_dyn_ratio_upper_error_rot = table_dynamical_mass_evolution[2][12]
+sigma_high_redshift_dyn_ratio_with_sigma_rot = table_dynamical_mass_evolution[2][13]
+sigma_high_redshift_dyn_ratio_with_sigma_lower_error_rot = table_dynamical_mass_evolution[2][14]
+sigma_high_redshift_dyn_ratio_with_sigma_upper_error_rot = table_dynamical_mass_evolution[2][15]
+sigma_high_redshift_dyn_ratio_number_disp = table_dynamical_mass_evolution[2][16]
+sigma_high_redshift_dyn_ratio_disp = table_dynamical_mass_evolution[2][17]
+sigma_high_redshift_dyn_ratio_lower_error_disp = table_dynamical_mass_evolution[2][18]
+sigma_high_redshift_dyn_ratio_upper_error_disp = table_dynamical_mass_evolution[2][19]
+sigma_high_redshift_dyn_ratio_with_sigma_disp = table_dynamical_mass_evolution[2][20]
+sigma_high_redshift_dyn_ratio_with_sigma_lower_error_disp = table_dynamical_mass_evolution[2][21]
+sigma_high_redshift_dyn_ratio_with_sigma_upper_error_disp = table_dynamical_mass_evolution[2][22]
 
 ax[0].errorbar(sigma_high_redshift_redshift,
             sigma_high_redshift_dyn_ratio_all,
             ecolor='red',
-            yerr=np.array([[sigma_high_redshift_dyn_ratio_error_all,sigma_high_redshift_dyn_ratio_error_all]]).T,
             marker='H',
             markersize=10,
             markerfacecolor='red',
@@ -3303,11 +3547,23 @@ ax[0].errorbar(sigma_high_redshift_redshift,
             capsize=2,
             elinewidth=2,
             label=r'\textbf{10.0 - SIGMA (SIMONS+16)}')
+
+ax[0].fill([sigma_high_redshift_redshift-0.05,
+      sigma_high_redshift_redshift+0.05,
+      sigma_high_redshift_redshift+0.05,
+      sigma_high_redshift_redshift-0.05],
+     [sigma_high_redshift_dyn_ratio_all - sigma_high_redshift_dyn_ratio_lower_error_all,
+      sigma_high_redshift_dyn_ratio_all - sigma_high_redshift_dyn_ratio_lower_error_all,
+      sigma_high_redshift_dyn_ratio_all + sigma_high_redshift_dyn_ratio_upper_error_all,
+      sigma_high_redshift_dyn_ratio_all + sigma_high_redshift_dyn_ratio_upper_error_all],
+     'red',
+      edgecolor='red',
+      lw=2,
+      alpha=0.25)
 
 ax[1].errorbar(sigma_high_redshift_redshift,
             sigma_high_redshift_dyn_ratio_rot,
             ecolor='red',
-            yerr=np.array([[sigma_high_redshift_dyn_ratio_error_rot,sigma_high_redshift_dyn_ratio_error_rot]]).T,
             marker='H',
             markersize=10,
             markerfacecolor='red',
@@ -3317,10 +3573,22 @@ ax[1].errorbar(sigma_high_redshift_redshift,
             elinewidth=2,
             label=r'\textbf{10.0 - SIGMA (SIMONS+16)}')
 
+ax[1].fill([sigma_high_redshift_redshift-0.05,
+      sigma_high_redshift_redshift+0.05,
+      sigma_high_redshift_redshift+0.05,
+      sigma_high_redshift_redshift-0.05],
+     [sigma_high_redshift_dyn_ratio_rot - sigma_high_redshift_dyn_ratio_lower_error_rot,
+      sigma_high_redshift_dyn_ratio_rot - sigma_high_redshift_dyn_ratio_lower_error_rot,
+      sigma_high_redshift_dyn_ratio_rot + sigma_high_redshift_dyn_ratio_upper_error_rot,
+      sigma_high_redshift_dyn_ratio_rot + sigma_high_redshift_dyn_ratio_upper_error_rot],
+     'red',
+      edgecolor='red',
+      lw=2,
+      alpha=0.25)
+
 ax[2].errorbar(sigma_high_redshift_redshift,
-            sigma_high_redshift_ang_mom_tot_delta_beta_disp,
+            sigma_high_redshift_dyn_ratio_disp,
             ecolor='red',
-            yerr=np.array([[sigma_high_redshift_ang_mom_tot_delta_beta_lower_error_disp,sigma_high_redshift_ang_mom_tot_delta_beta_upper_error_disp]]).T,
             marker='H',
             markersize=10,
             markerfacecolor='red',
@@ -3329,23 +3597,39 @@ ax[2].errorbar(sigma_high_redshift_redshift,
             capsize=2,
             elinewidth=2,
             label=r'\textbf{10.0 - SIGMA (SIMONS+16)}')
+
+ax[2].fill([sigma_high_redshift_redshift-0.05,
+      sigma_high_redshift_redshift+0.05,
+      sigma_high_redshift_redshift+0.05,
+      sigma_high_redshift_redshift-0.05],
+     [sigma_high_redshift_dyn_ratio_disp - sigma_high_redshift_dyn_ratio_lower_error_disp,
+      sigma_high_redshift_dyn_ratio_disp - sigma_high_redshift_dyn_ratio_lower_error_disp,
+      sigma_high_redshift_dyn_ratio_disp + sigma_high_redshift_dyn_ratio_upper_error_disp,
+      sigma_high_redshift_dyn_ratio_disp + sigma_high_redshift_dyn_ratio_upper_error_disp],
+     'red',
+      edgecolor='red',
+      lw=2,
+      alpha=0.25)
 
 amaze_redshift = table_dynamical_mass_evolution[8][1]
 amaze_dyn_ratio_number_all = table_dynamical_mass_evolution[8][2]
 amaze_dyn_ratio_all = table_dynamical_mass_evolution[8][3]
-amaze_dyn_ratio_error_all = table_dynamical_mass_evolution[8][4]
-amaze_dyn_ratio_with_sigma_all = table_dynamical_mass_evolution[8][5]
-amaze_dyn_ratio_with_sigma_error_all = table_dynamical_mass_evolution[8][6]
+amaze_dyn_ratio_lower_error_all = table_dynamical_mass_evolution[8][4]
+amaze_dyn_ratio_upper_error_all = table_dynamical_mass_evolution[8][5]
+amaze_dyn_ratio_with_sigma_all = table_dynamical_mass_evolution[8][6]
+amaze_dyn_ratio_with_sigma_lower_error_all = table_dynamical_mass_evolution[8][7]
+amaze_dyn_ratio_with_sigma_upper_error_all = table_dynamical_mass_evolution[8][8]
 amaze_dyn_ratio_number_rot = table_dynamical_mass_evolution[8][2]
 amaze_dyn_ratio_rot = table_dynamical_mass_evolution[8][3]
-amaze_dyn_ratio_error_rot = table_dynamical_mass_evolution[8][4]
-amaze_dyn_ratio_with_sigma_rot = table_dynamical_mass_evolution[8][5]
-amaze_dyn_ratio_with_sigma_error_rot = table_dynamical_mass_evolution[8][6]
+amaze_dyn_ratio_lower_error_rot = table_dynamical_mass_evolution[8][4]
+amaze_dyn_ratio_upper_error_rot = table_dynamical_mass_evolution[8][5]
+amaze_dyn_ratio_with_sigma_rot = table_dynamical_mass_evolution[8][6]
+amaze_dyn_ratio_with_sigma_lower_error_rot = table_dynamical_mass_evolution[8][7]
+amaze_dyn_ratio_with_sigma_upper_error_rot = table_dynamical_mass_evolution[8][8]
 
 ax[0].errorbar(amaze_redshift,
             amaze_dyn_ratio_all,
             ecolor='saddlebrown',
-            yerr=np.array([[amaze_dyn_ratio_error_all,amaze_dyn_ratio_error_all]]).T,
             marker='D',
             markersize=10,
             markerfacecolor='saddlebrown',
@@ -3354,11 +3638,23 @@ ax[0].errorbar(amaze_redshift,
             capsize=2,
             elinewidth=2,
             label=r'\textbf{10.0 - AMAZE (Gnerucci+11)}')
+
+ax[0].fill([amaze_redshift-0.05,
+      amaze_redshift+0.05,
+      amaze_redshift+0.05,
+      amaze_redshift-0.05],
+     [amaze_dyn_ratio_all - amaze_dyn_ratio_lower_error_all,
+      amaze_dyn_ratio_all - amaze_dyn_ratio_lower_error_all,
+      amaze_dyn_ratio_all + amaze_dyn_ratio_upper_error_all,
+      amaze_dyn_ratio_all + amaze_dyn_ratio_upper_error_all],
+     'saddlebrown',
+      edgecolor='saddlebrown',
+      lw=2,
+      alpha=0.25)
 
 ax[1].errorbar(amaze_redshift,
             amaze_dyn_ratio_rot,
             ecolor='saddlebrown',
-            yerr=np.array([[amaze_dyn_ratio_error_rot,amaze_dyn_ratio_error_rot]]).T,
             marker='D',
             markersize=10,
             markerfacecolor='saddlebrown',
@@ -3368,27 +3664,45 @@ ax[1].errorbar(amaze_redshift,
             elinewidth=2,
             label=r'\textbf{10.0 - AMAZE (Gnerucci+11)}')
 
+ax[1].fill([amaze_redshift-0.05,
+      amaze_redshift+0.05,
+      amaze_redshift+0.05,
+      amaze_redshift-0.05],
+     [amaze_dyn_ratio_rot - amaze_dyn_ratio_lower_error_rot,
+      amaze_dyn_ratio_rot - amaze_dyn_ratio_lower_error_rot,
+      amaze_dyn_ratio_rot + amaze_dyn_ratio_upper_error_rot,
+      amaze_dyn_ratio_rot + amaze_dyn_ratio_upper_error_rot],
+     'saddlebrown',
+      edgecolor='saddlebrown',
+      lw=2,
+      alpha=0.25)
+
 kds_redshift = table_dynamical_mass_evolution[9][1]
 kds_dyn_ratio_number_all = table_dynamical_mass_evolution[9][2]
 kds_dyn_ratio_all = table_dynamical_mass_evolution[9][3]
-kds_dyn_ratio_error_all = table_dynamical_mass_evolution[9][4]
-kds_dyn_ratio_with_sigma_all = table_dynamical_mass_evolution[9][5]
-kds_dyn_ratio_with_sigma_error_all = table_dynamical_mass_evolution[9][6]
-kds_dyn_ratio_number_rot = table_dynamical_mass_evolution[9][7]
-kds_dyn_ratio_rot = table_dynamical_mass_evolution[9][8]
-kds_dyn_ratio_error_rot = table_dynamical_mass_evolution[9][9]
-kds_dyn_ratio_with_sigma_rot = table_dynamical_mass_evolution[9][10]
-kds_dyn_ratio_with_sigma_error_rot = table_dynamical_mass_evolution[9][11]
-kds_dyn_ratio_number_disp = table_dynamical_mass_evolution[9][12]
-kds_dyn_ratio_disp = table_dynamical_mass_evolution[9][13]
-kds_dyn_ratio_error_disp = table_dynamical_mass_evolution[9][14]
-kds_dyn_ratio_with_sigma_disp = table_dynamical_mass_evolution[9][15]
-kds_dyn_ratio_with_sigma_error_disp = table_dynamical_mass_evolution[9][16]
+kds_dyn_ratio_lower_error_all = table_dynamical_mass_evolution[9][4]
+kds_dyn_ratio_upper_error_all = table_dynamical_mass_evolution[9][5]
+kds_dyn_ratio_with_sigma_all = table_dynamical_mass_evolution[9][6]
+kds_dyn_ratio_with_sigma_lower_error_all = table_dynamical_mass_evolution[9][7]
+kds_dyn_ratio_with_sigma_upper_error_all = table_dynamical_mass_evolution[9][8]
+kds_dyn_ratio_number_rot = table_dynamical_mass_evolution[9][9]
+kds_dyn_ratio_rot = table_dynamical_mass_evolution[9][10]
+kds_dyn_ratio_lower_error_rot = table_dynamical_mass_evolution[9][11]
+kds_dyn_ratio_upper_error_rot = table_dynamical_mass_evolution[9][12]
+kds_dyn_ratio_with_sigma_rot = table_dynamical_mass_evolution[9][13]
+kds_dyn_ratio_with_sigma_lower_error_rot = table_dynamical_mass_evolution[9][14]
+kds_dyn_ratio_with_sigma_upper_error_rot = table_dynamical_mass_evolution[9][15]
+kds_dyn_ratio_number_disp = table_dynamical_mass_evolution[9][16]
+kds_dyn_ratio_disp = table_dynamical_mass_evolution[9][17]
+kds_dyn_ratio_lower_error_disp = table_dynamical_mass_evolution[9][18]
+kds_dyn_ratio_upper_error_disp = table_dynamical_mass_evolution[9][19]
+kds_dyn_ratio_with_sigma_disp = table_dynamical_mass_evolution[9][20]
+kds_dyn_ratio_with_sigma_lower_error_disp = table_dynamical_mass_evolution[9][21]
+kds_dyn_ratio_with_sigma_upper_error_disp = table_dynamical_mass_evolution[9][22]
 
 ax[0].errorbar(kds_redshift,
             kds_dyn_ratio_all,
             ecolor='firebrick',
-            yerr=np.array([[kds_dyn_ratio_error_all,kds_dyn_ratio_error_all]]).T,
             marker='o',
             markersize=16,
             markerfacecolor='firebrick',
@@ -3397,11 +3711,23 @@ ax[0].errorbar(kds_redshift,
             capsize=2,
             elinewidth=2,
             label=r'\textbf{9.8 - KDS (This study)}')
+
+ax[0].fill([kds_redshift-0.05,
+      kds_redshift+0.05,
+      kds_redshift+0.05,
+      kds_redshift-0.05],
+     [kds_dyn_ratio_all - kds_dyn_ratio_lower_error_all,
+      kds_dyn_ratio_all - kds_dyn_ratio_lower_error_all,
+      kds_dyn_ratio_all + kds_dyn_ratio_upper_error_all,
+      kds_dyn_ratio_all + kds_dyn_ratio_upper_error_all],
+     'firebrick',
+      edgecolor='firebrick',
+      lw=2,
+      alpha=0.25)
 
 ax[1].errorbar(kds_redshift,
             kds_dyn_ratio_rot,
             ecolor='firebrick',
-            yerr=np.array([[kds_dyn_ratio_error_rot,kds_dyn_ratio_error_rot]]).T,
             marker='o',
             markersize=16,
             markerfacecolor='firebrick',
@@ -3411,10 +3737,22 @@ ax[1].errorbar(kds_redshift,
             elinewidth=2,
             label=r'\textbf{9.8 - KDS (This study)}')
 
+ax[1].fill([kds_redshift-0.05,
+      kds_redshift+0.05,
+      kds_redshift+0.05,
+      kds_redshift-0.05],
+     [kds_dyn_ratio_rot - kds_dyn_ratio_lower_error_rot,
+      kds_dyn_ratio_rot - kds_dyn_ratio_lower_error_rot,
+      kds_dyn_ratio_rot + kds_dyn_ratio_upper_error_rot,
+      kds_dyn_ratio_rot + kds_dyn_ratio_upper_error_rot],
+     'firebrick',
+      edgecolor='firebrick',
+      lw=2,
+      alpha=0.25)
+
 ax[2].errorbar(kds_redshift,
             kds_dyn_ratio_disp,
             ecolor='firebrick',
-            yerr=np.array([[kds_dyn_ratio_error_disp,kds_dyn_ratio_error_disp]]).T,
             marker='o',
             markersize=16,
             markerfacecolor='firebrick',
@@ -3423,6 +3761,19 @@ ax[2].errorbar(kds_redshift,
             capsize=2,
             elinewidth=2,
             label=r'\textbf{9.8 - KDS (This study)}')
+
+ax[2].fill([kds_redshift-0.05,
+      kds_redshift+0.05,
+      kds_redshift+0.05,
+      kds_redshift-0.05],
+     [kds_dyn_ratio_disp - kds_dyn_ratio_lower_error_disp,
+      kds_dyn_ratio_disp - kds_dyn_ratio_lower_error_disp,
+      kds_dyn_ratio_disp + kds_dyn_ratio_upper_error_disp,
+      kds_dyn_ratio_disp + kds_dyn_ratio_upper_error_disp],
+     'firebrick',
+      edgecolor='firebrick',
+      lw=2,
+      alpha=0.25)
 
 # split legend for the full samples
 all_legend = []
@@ -3474,13 +3825,13 @@ legend3 = ax[2].legend(disp_legend[0],
                      r'\textbf{9.9 - KROSS (Harrison+17)}',
                      r'\textbf{10.2 - MASSIV (Epinat+12)}',
                      r'\textbf{9.8 - MKS (Swinbank+17)}'],
-                    loc=('upper left'),
+                    loc=('lower left'),
                     prop={'size':11,'weight':'bold'},
                     frameon=False,
                     markerscale=0.75,
                     numpoints=1)
 ax[2].add_artist(legend3)
-ax[2].legend(loc='upper right',
+ax[2].legend(loc='lower right',
           prop={'size':11,'weight':'bold'},
           frameon=False,
           markerscale=0.75,
@@ -3490,4 +3841,826 @@ fig.tight_layout()
 fig.subplots_adjust(wspace=0)
 plt.show()
 fig.savefig('/disk2/turner/disk1/turner/DATA/kmos_dynamics_paper_plots/PAPER_2_PLOTS/dyn_mass_evolution.png')
+plt.close('all')
+
+# make the dynamical mass evolution plots
+
+lines = {'linestyle': 'None'}
+plt.rc('lines', **lines)
+
+fig, ax = plt.subplots(1, 3, sharey=True, figsize=(18,7))
+
+
+ax[0].set_ylabel(r'M$\boldsymbol{_{vir}}$/M$\boldsymbol{_{\star}}$',
+              fontsize=30,
+              fontweight='bold',
+              labelpad=15)
+
+ax[0].set_xlabel(r'redshift',
+              fontsize=30,
+              fontweight='bold',
+              labelpad=15)
+
+# tick parameters 
+ax[0].tick_params(axis='both',
+                   which='major',
+                   labelsize=26,
+                   length=12,
+                   width=4)
+ax[0].tick_params(axis='both',
+                   which='minor',
+                   labelsize=26,
+                   length=6,
+                   width=4)
+
+[i.set_linewidth(4.0) for i in ax[0].spines.itervalues()]
+ax[0].set_xlim(-0.3,3.9)
+ax[0].set_ylim(-4.0,8.0)
+ax[0].minorticks_on()
+
+xa = ax[0].get_xaxis()
+xa.set_major_locator(MaxNLocator(integer=True))
+
+ax[1].set_xlabel(r'redshift',
+              fontsize=30,
+              fontweight='bold',
+              labelpad=15)
+
+# tick parameters 
+ax[1].tick_params(axis='both',
+                   which='major',
+                   labelsize=26,
+                   length=12,
+                   width=4)
+ax[1].tick_params(axis='both',
+                   which='minor',
+                   labelsize=26,
+                   length=6,
+                   width=4)
+
+[i.set_linewidth(4.0) for i in ax[1].spines.itervalues()]
+ax[1].set_xlim(-0.3,3.9)
+ax[1].set_ylim(-4.0,8.0)
+ax[1].minorticks_on()
+
+
+xa = ax[1].get_xaxis()
+xa.set_major_locator(MaxNLocator(integer=True))
+
+
+ax[2].set_xlabel(r'redshift',
+              fontsize=30,
+              fontweight='bold',
+              labelpad=15)
+
+# tick parameters 
+ax[2].tick_params(axis='both',
+                   which='major',
+                   labelsize=26,
+                   length=12,
+                   width=4)
+ax[2].tick_params(axis='both',
+                   which='minor',
+                   labelsize=26,
+                   length=6,
+                   width=4)
+
+[i.set_linewidth(4.0) for i in ax[2].spines.itervalues()]
+ax[2].set_xlim(-0.3,3.9)
+ax[2].set_ylim(-4.0,8.0)
+ax[2].minorticks_on()
+
+
+xa = ax[2].get_xaxis()
+xa.set_major_locator(MaxNLocator(integer=True))
+
+p1_all = ax[0].errorbar(dynamo_redshift,
+            dynamo_dyn_ratio_with_sigma_all,
+            ecolor='cornflowerblue',
+            marker='p',
+            markersize=10,
+            markerfacecolor='cornflowerblue',
+            markeredgecolor='cornflowerblue',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[0].fill([dynamo_redshift-0.05,
+      dynamo_redshift+0.05,
+      dynamo_redshift+0.05,
+      dynamo_redshift-0.05],
+     [dynamo_dyn_ratio_with_sigma_all - dynamo_dyn_ratio_with_sigma_lower_error_all,
+      dynamo_dyn_ratio_with_sigma_all - dynamo_dyn_ratio_with_sigma_lower_error_all,
+      dynamo_dyn_ratio_with_sigma_all + dynamo_dyn_ratio_with_sigma_upper_error_all,
+      dynamo_dyn_ratio_with_sigma_all + dynamo_dyn_ratio_with_sigma_upper_error_all],
+     'cornflowerblue',
+      edgecolor='cornflowerblue',
+      lw=2,
+      alpha=0.25)
+
+
+p1_rot = ax[1].errorbar(dynamo_redshift,
+            dynamo_dyn_ratio_with_sigma_rot,
+            ecolor='cornflowerblue',
+            marker='p',
+            markersize=10,
+            markerfacecolor='cornflowerblue',
+            markeredgecolor='cornflowerblue',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[1].fill([dynamo_redshift-0.05,
+      dynamo_redshift+0.05,
+      dynamo_redshift+0.05,
+      dynamo_redshift-0.05],
+     [dynamo_dyn_ratio_with_sigma_rot - dynamo_dyn_ratio_with_sigma_lower_error_rot,
+      dynamo_dyn_ratio_with_sigma_rot - dynamo_dyn_ratio_with_sigma_lower_error_rot,
+      dynamo_dyn_ratio_with_sigma_rot + dynamo_dyn_ratio_with_sigma_upper_error_rot,
+      dynamo_dyn_ratio_with_sigma_rot + dynamo_dyn_ratio_with_sigma_upper_error_rot],
+     'cornflowerblue',
+      edgecolor='cornflowerblue',
+      lw=2,
+      alpha=0.25)
+
+p2_all = ax[0].errorbar(swinbank_low_redshift_redshift,
+            swinbank_low_redshift_dyn_ratio_with_sigma_all,
+            ecolor='navy',
+            marker='^',
+            markersize=10,
+            markerfacecolor='none',
+            markeredgecolor='navy',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[0].fill([swinbank_low_redshift_redshift-0.05,
+      swinbank_low_redshift_redshift+0.05,
+      swinbank_low_redshift_redshift+0.05,
+      swinbank_low_redshift_redshift-0.05],
+     [swinbank_low_redshift_dyn_ratio_with_sigma_all - swinbank_low_redshift_dyn_ratio_with_sigma_lower_error_all,
+      swinbank_low_redshift_dyn_ratio_with_sigma_all - swinbank_low_redshift_dyn_ratio_with_sigma_lower_error_all,
+      swinbank_low_redshift_dyn_ratio_with_sigma_all + swinbank_low_redshift_dyn_ratio_with_sigma_upper_error_all,
+      swinbank_low_redshift_dyn_ratio_with_sigma_all + swinbank_low_redshift_dyn_ratio_with_sigma_upper_error_all],
+     'navy',
+      edgecolor='navy',
+      lw=2,
+      alpha=0.25)
+
+p2_rot = ax[1].errorbar(swinbank_low_redshift_redshift,
+            swinbank_low_redshift_dyn_ratio_with_sigma_rot,
+            ecolor='navy',
+            marker='^',
+            markersize=10,
+            markerfacecolor='none',
+            markeredgecolor='navy',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[1].fill([swinbank_low_redshift_redshift-0.05,
+      swinbank_low_redshift_redshift+0.05,
+      swinbank_low_redshift_redshift+0.05,
+      swinbank_low_redshift_redshift-0.05],
+     [swinbank_low_redshift_dyn_ratio_with_sigma_rot - swinbank_low_redshift_dyn_ratio_with_sigma_lower_error_rot,
+      swinbank_low_redshift_dyn_ratio_with_sigma_rot - swinbank_low_redshift_dyn_ratio_with_sigma_lower_error_rot,
+      swinbank_low_redshift_dyn_ratio_with_sigma_rot + swinbank_low_redshift_dyn_ratio_with_sigma_upper_error_rot,
+      swinbank_low_redshift_dyn_ratio_with_sigma_rot + swinbank_low_redshift_dyn_ratio_with_sigma_upper_error_rot],
+     'navy',
+      edgecolor='navy',
+      lw=2,
+      alpha=0.25)
+
+p1_disp = ax[2].errorbar(swinbank_low_redshift_redshift,
+            swinbank_low_redshift_dyn_ratio_with_sigma_disp,
+            ecolor='navy',
+            marker='^',
+            markersize=10,
+            markerfacecolor='none',
+            markeredgecolor='navy',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[2].fill([swinbank_low_redshift_redshift-0.05,
+      swinbank_low_redshift_redshift+0.05,
+      swinbank_low_redshift_redshift+0.05,
+      swinbank_low_redshift_redshift-0.05],
+     [swinbank_low_redshift_dyn_ratio_with_sigma_disp - swinbank_low_redshift_dyn_ratio_with_sigma_lower_error_disp,
+      swinbank_low_redshift_dyn_ratio_with_sigma_disp - swinbank_low_redshift_dyn_ratio_with_sigma_lower_error_disp,
+      swinbank_low_redshift_dyn_ratio_with_sigma_disp + swinbank_low_redshift_dyn_ratio_with_sigma_upper_error_disp,
+      swinbank_low_redshift_dyn_ratio_with_sigma_disp + swinbank_low_redshift_dyn_ratio_with_sigma_upper_error_disp],
+     'navy',
+      edgecolor='navy',
+      lw=2,
+      alpha=0.25)
+
+p2_all = ax[0].errorbar(kross_redshift,
+            kross_dyn_ratio_with_sigma_all,
+            ecolor='limegreen',
+            marker='>',
+            markersize=10,
+            markerfacecolor='none',
+            markeredgecolor='limegreen',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[0].fill([kross_redshift-0.05,
+      kross_redshift+0.05,
+      kross_redshift+0.05,
+      kross_redshift-0.05],
+     [kross_dyn_ratio_with_sigma_all - kross_dyn_ratio_with_sigma_lower_error_all,
+      kross_dyn_ratio_with_sigma_all - kross_dyn_ratio_with_sigma_lower_error_all,
+      kross_dyn_ratio_with_sigma_all + kross_dyn_ratio_with_sigma_upper_error_all,
+      kross_dyn_ratio_with_sigma_all + kross_dyn_ratio_with_sigma_upper_error_all],
+     'limegreen',
+      edgecolor='limegreen',
+      lw=2,
+      alpha=0.25)
+
+p2_rot = ax[1].errorbar(kross_redshift,
+            kross_dyn_ratio_with_sigma_rot,
+            ecolor='limegreen',
+            marker='>',
+            markersize=10,
+            markerfacecolor='none',
+            markeredgecolor='limegreen',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[1].fill([kross_redshift-0.05,
+      kross_redshift+0.05,
+      kross_redshift+0.05,
+      kross_redshift-0.05],
+     [kross_dyn_ratio_with_sigma_rot - kross_dyn_ratio_with_sigma_lower_error_rot,
+      kross_dyn_ratio_with_sigma_rot - kross_dyn_ratio_with_sigma_lower_error_rot,
+      kross_dyn_ratio_with_sigma_rot + kross_dyn_ratio_with_sigma_upper_error_rot,
+      kross_dyn_ratio_with_sigma_rot + kross_dyn_ratio_with_sigma_upper_error_rot],
+     'limegreen',
+      edgecolor='limegreen',
+      lw=2,
+      alpha=0.25)
+
+p1_disp = ax[2].errorbar(kross_redshift,
+            kross_dyn_ratio_with_sigma_disp,
+            ecolor='limegreen',
+            marker='>',
+            markersize=10,
+            markerfacecolor='none',
+            markeredgecolor='limegreen',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[2].fill([kross_redshift-0.05,
+      kross_redshift+0.05,
+      kross_redshift+0.05,
+      kross_redshift-0.05],
+     [kross_dyn_ratio_with_sigma_disp - kross_dyn_ratio_with_sigma_lower_error_disp,
+      kross_dyn_ratio_with_sigma_disp - kross_dyn_ratio_with_sigma_lower_error_disp,
+      kross_dyn_ratio_with_sigma_disp + kross_dyn_ratio_with_sigma_upper_error_disp,
+      kross_dyn_ratio_with_sigma_disp + kross_dyn_ratio_with_sigma_upper_error_disp],
+     'limegreen',
+      edgecolor='limegreen',
+      lw=2,
+      alpha=0.25)
+
+p2_all = ax[0].errorbar(massiv_redshift,
+            massiv_dyn_ratio_with_sigma_all,
+            ecolor='olive',
+            marker='v',
+            markersize=10,
+            markerfacecolor='none',
+            markeredgecolor='olive',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[0].fill([massiv_redshift-0.05,
+      massiv_redshift+0.05,
+      massiv_redshift+0.05,
+      massiv_redshift-0.05],
+     [massiv_dyn_ratio_with_sigma_all - massiv_dyn_ratio_with_sigma_lower_error_all,
+      massiv_dyn_ratio_with_sigma_all - massiv_dyn_ratio_with_sigma_lower_error_all,
+      massiv_dyn_ratio_with_sigma_all + massiv_dyn_ratio_with_sigma_upper_error_all,
+      massiv_dyn_ratio_with_sigma_all + massiv_dyn_ratio_with_sigma_upper_error_all],
+     'olive',
+      edgecolor='olive',
+      lw=2,
+      alpha=0.25)
+
+p2_rot = ax[1].errorbar(massiv_redshift,
+            massiv_dyn_ratio_with_sigma_rot,
+            ecolor='olive',
+            marker='v',
+            markersize=10,
+            markerfacecolor='none',
+            markeredgecolor='olive',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[1].fill([massiv_redshift-0.05,
+      massiv_redshift+0.05,
+      massiv_redshift+0.05,
+      massiv_redshift-0.05],
+     [massiv_dyn_ratio_with_sigma_rot - massiv_dyn_ratio_with_sigma_lower_error_rot,
+      massiv_dyn_ratio_with_sigma_rot - massiv_dyn_ratio_with_sigma_lower_error_rot,
+      massiv_dyn_ratio_with_sigma_rot + massiv_dyn_ratio_with_sigma_upper_error_rot,
+      massiv_dyn_ratio_with_sigma_rot + massiv_dyn_ratio_with_sigma_upper_error_rot],
+     'olive',
+      edgecolor='olive',
+      lw=2,
+      alpha=0.25)
+
+p1_disp = ax[2].errorbar(massiv_redshift,
+            massiv_dyn_ratio_with_sigma_disp,
+            ecolor='olive',
+            marker='v',
+            markersize=10,
+            markerfacecolor='none',
+            markeredgecolor='olive',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[2].fill([massiv_redshift-0.05,
+      massiv_redshift+0.05,
+      massiv_redshift+0.05,
+      massiv_redshift-0.05],
+     [massiv_dyn_ratio_with_sigma_disp - massiv_dyn_ratio_with_sigma_lower_error_disp,
+      massiv_dyn_ratio_with_sigma_disp - massiv_dyn_ratio_with_sigma_lower_error_disp,
+      massiv_dyn_ratio_with_sigma_disp + massiv_dyn_ratio_with_sigma_upper_error_disp,
+      massiv_dyn_ratio_with_sigma_disp + massiv_dyn_ratio_with_sigma_upper_error_disp],
+     'olive',
+      edgecolor='olive',
+      lw=2,
+      alpha=0.25)
+
+p5_all = ax[0].errorbar(swinbank_high_redshift_redshift,
+            swinbank_high_redshift_dyn_ratio_with_sigma_all,
+            ecolor='darkgreen',
+            marker='^',
+            markersize=10,
+            markerfacecolor='none',
+            markeredgecolor='darkgreen',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[0].fill([swinbank_high_redshift_redshift-0.05,
+      swinbank_high_redshift_redshift+0.05,
+      swinbank_high_redshift_redshift+0.05,
+      swinbank_high_redshift_redshift-0.05],
+     [swinbank_high_redshift_dyn_ratio_with_sigma_all - swinbank_high_redshift_dyn_ratio_with_sigma_lower_error_all,
+      swinbank_high_redshift_dyn_ratio_with_sigma_all - swinbank_high_redshift_dyn_ratio_with_sigma_lower_error_all,
+      swinbank_high_redshift_dyn_ratio_with_sigma_all + swinbank_high_redshift_dyn_ratio_with_sigma_upper_error_all,
+      swinbank_high_redshift_dyn_ratio_with_sigma_all + swinbank_high_redshift_dyn_ratio_with_sigma_upper_error_all],
+     'darkgreen',
+      edgecolor='darkgreen',
+      lw=2,
+      alpha=0.25)
+
+p5_rot = ax[1].errorbar(swinbank_high_redshift_redshift,
+            swinbank_high_redshift_dyn_ratio_with_sigma_rot,
+            ecolor='darkgreen',
+            marker='^',
+            markersize=10,
+            markerfacecolor='none',
+            markeredgecolor='darkgreen',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[1].fill([swinbank_high_redshift_redshift-0.05,
+      swinbank_high_redshift_redshift+0.05,
+      swinbank_high_redshift_redshift+0.05,
+      swinbank_high_redshift_redshift-0.05],
+     [swinbank_high_redshift_dyn_ratio_with_sigma_rot - swinbank_high_redshift_dyn_ratio_with_sigma_lower_error_rot,
+      swinbank_high_redshift_dyn_ratio_with_sigma_rot - swinbank_high_redshift_dyn_ratio_with_sigma_lower_error_rot,
+      swinbank_high_redshift_dyn_ratio_with_sigma_rot + swinbank_high_redshift_dyn_ratio_with_sigma_upper_error_rot,
+      swinbank_high_redshift_dyn_ratio_with_sigma_rot + swinbank_high_redshift_dyn_ratio_with_sigma_upper_error_rot],
+     'darkgreen',
+      edgecolor='darkgreen',
+      lw=2,
+      alpha=0.25)
+
+p4_disp = ax[2].errorbar(swinbank_high_redshift_redshift,
+            swinbank_high_redshift_dyn_ratio_with_sigma_disp,
+            ecolor='darkgreen',
+            marker='^',
+            markersize=10,
+            markerfacecolor='none',
+            markeredgecolor='darkgreen',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2)
+
+ax[2].fill([swinbank_high_redshift_redshift-0.05,
+      swinbank_high_redshift_redshift+0.05,
+      swinbank_high_redshift_redshift+0.05,
+      swinbank_high_redshift_redshift-0.05],
+     [swinbank_high_redshift_dyn_ratio_with_sigma_disp - swinbank_high_redshift_dyn_ratio_with_sigma_lower_error_disp,
+      swinbank_high_redshift_dyn_ratio_with_sigma_disp - swinbank_high_redshift_dyn_ratio_with_sigma_lower_error_disp,
+      swinbank_high_redshift_dyn_ratio_with_sigma_disp + swinbank_high_redshift_dyn_ratio_with_sigma_upper_error_disp,
+      swinbank_high_redshift_dyn_ratio_with_sigma_disp + swinbank_high_redshift_dyn_ratio_with_sigma_upper_error_disp],
+     'darkgreen',
+      edgecolor='darkgreen',
+      lw=2,
+      alpha=0.25)
+
+ax[0].errorbar(sigma_low_redshift_redshift,
+            sigma_low_redshift_dyn_ratio_with_sigma_all,
+            ecolor='teal',
+            marker='H',
+            markersize=10,
+            markerfacecolor='teal',
+            markeredgecolor='teal',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{10.1 - SIGMA (SIMONS+16)}')
+
+ax[0].fill([sigma_low_redshift_redshift-0.05,
+      sigma_low_redshift_redshift+0.05,
+      sigma_low_redshift_redshift+0.05,
+      sigma_low_redshift_redshift-0.05],
+     [sigma_low_redshift_dyn_ratio_with_sigma_all - sigma_low_redshift_dyn_ratio_with_sigma_lower_error_all,
+      sigma_low_redshift_dyn_ratio_with_sigma_all - sigma_low_redshift_dyn_ratio_with_sigma_lower_error_all,
+      sigma_low_redshift_dyn_ratio_with_sigma_all + sigma_low_redshift_dyn_ratio_with_sigma_upper_error_all,
+      sigma_low_redshift_dyn_ratio_with_sigma_all + sigma_low_redshift_dyn_ratio_with_sigma_upper_error_all],
+     'teal',
+      edgecolor='teal',
+      lw=2,
+      alpha=0.25)
+
+ax[1].errorbar(sigma_low_redshift_redshift,
+            sigma_low_redshift_dyn_ratio_with_sigma_rot,
+            ecolor='teal',
+            marker='H',
+            markersize=10,
+            markerfacecolor='teal',
+            markeredgecolor='teal',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{10.1 - SIGMA (SIMONS+16)}')
+
+ax[1].fill([sigma_low_redshift_redshift-0.05,
+      sigma_low_redshift_redshift+0.05,
+      sigma_low_redshift_redshift+0.05,
+      sigma_low_redshift_redshift-0.05],
+     [sigma_low_redshift_dyn_ratio_with_sigma_rot - sigma_low_redshift_dyn_ratio_with_sigma_lower_error_rot,
+      sigma_low_redshift_dyn_ratio_with_sigma_rot - sigma_low_redshift_dyn_ratio_with_sigma_lower_error_rot,
+      sigma_low_redshift_dyn_ratio_with_sigma_rot + sigma_low_redshift_dyn_ratio_with_sigma_upper_error_rot,
+      sigma_low_redshift_dyn_ratio_with_sigma_rot + sigma_low_redshift_dyn_ratio_with_sigma_upper_error_rot],
+     'teal',
+      edgecolor='teal',
+      lw=2,
+      alpha=0.25)
+
+ax[2].errorbar(sigma_low_redshift_redshift,
+            sigma_low_redshift_dyn_ratio_with_sigma_disp,
+            ecolor='teal',
+            marker='H',
+            markersize=10,
+            markerfacecolor='teal',
+            markeredgecolor='teal',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{10.1 - SIGMA (SIMONS+16)}')
+
+ax[2].fill([sigma_low_redshift_redshift-0.05,
+      sigma_low_redshift_redshift+0.05,
+      sigma_low_redshift_redshift+0.05,
+      sigma_low_redshift_redshift-0.05],
+     [sigma_low_redshift_dyn_ratio_with_sigma_disp - sigma_low_redshift_dyn_ratio_with_sigma_lower_error_disp,
+      sigma_low_redshift_dyn_ratio_with_sigma_disp - sigma_low_redshift_dyn_ratio_with_sigma_lower_error_disp,
+      sigma_low_redshift_dyn_ratio_with_sigma_disp + sigma_low_redshift_dyn_ratio_with_sigma_upper_error_disp,
+      sigma_low_redshift_dyn_ratio_with_sigma_disp + sigma_low_redshift_dyn_ratio_with_sigma_upper_error_disp],
+     'teal',
+      edgecolor='teal',
+      lw=2,
+      alpha=0.25)
+
+ax[0].errorbar(cresci_redshift,
+            cresci_dyn_ratio_with_sigma_all,
+            ecolor='darkorange',
+            marker='*',
+            markersize=15,
+            markerfacecolor='darkorange',
+            markeredgecolor='darkorange',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{10.6 - SINS (Cresci+09)}')
+
+ax[0].fill([cresci_redshift-0.05,
+      cresci_redshift+0.05,
+      cresci_redshift+0.05,
+      cresci_redshift-0.05],
+     [cresci_dyn_ratio_with_sigma_all - cresci_dyn_ratio_with_sigma_lower_error_all,
+      cresci_dyn_ratio_with_sigma_all - cresci_dyn_ratio_with_sigma_lower_error_all,
+      cresci_dyn_ratio_with_sigma_all + cresci_dyn_ratio_with_sigma_upper_error_all,
+      cresci_dyn_ratio_with_sigma_all + cresci_dyn_ratio_with_sigma_upper_error_all],
+     'darkorange',
+      edgecolor='darkorange',
+      lw=2,
+      alpha=0.25)
+
+ax[1].errorbar(cresci_redshift,
+            cresci_dyn_ratio_with_sigma_rot,
+            ecolor='darkorange',
+            marker='*',
+            markersize=15,
+            markerfacecolor='darkorange',
+            markeredgecolor='darkorange',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{10.6 - SINS (Cresci+09)}')
+
+ax[1].fill([cresci_redshift-0.05,
+      cresci_redshift+0.05,
+      cresci_redshift+0.05,
+      cresci_redshift-0.05],
+     [cresci_dyn_ratio_with_sigma_rot - cresci_dyn_ratio_with_sigma_lower_error_rot,
+      cresci_dyn_ratio_with_sigma_rot - cresci_dyn_ratio_with_sigma_lower_error_rot,
+      cresci_dyn_ratio_with_sigma_rot + cresci_dyn_ratio_with_sigma_upper_error_rot,
+      cresci_dyn_ratio_with_sigma_rot + cresci_dyn_ratio_with_sigma_upper_error_rot],
+     'darkorange',
+      edgecolor='darkorange',
+      lw=2,
+      alpha=0.25)
+
+
+ax[0].errorbar(sigma_high_redshift_redshift,
+            sigma_high_redshift_dyn_ratio_with_sigma_all,
+            ecolor='red',
+            marker='H',
+            markersize=10,
+            markerfacecolor='red',
+            markeredgecolor='red',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{10.0 - SIGMA (SIMONS+16)}')
+
+ax[0].fill([sigma_high_redshift_redshift-0.05,
+      sigma_high_redshift_redshift+0.05,
+      sigma_high_redshift_redshift+0.05,
+      sigma_high_redshift_redshift-0.05],
+     [sigma_high_redshift_dyn_ratio_with_sigma_all - sigma_high_redshift_dyn_ratio_with_sigma_lower_error_all,
+      sigma_high_redshift_dyn_ratio_with_sigma_all - sigma_high_redshift_dyn_ratio_with_sigma_lower_error_all,
+      sigma_high_redshift_dyn_ratio_with_sigma_all + sigma_high_redshift_dyn_ratio_with_sigma_upper_error_all,
+      sigma_high_redshift_dyn_ratio_with_sigma_all + sigma_high_redshift_dyn_ratio_with_sigma_upper_error_all],
+     'red',
+      edgecolor='red',
+      lw=2,
+      alpha=0.25)
+
+ax[1].errorbar(sigma_high_redshift_redshift,
+            sigma_high_redshift_dyn_ratio_with_sigma_rot,
+            ecolor='red',
+            marker='H',
+            markersize=10,
+            markerfacecolor='red',
+            markeredgecolor='red',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{10.0 - SIGMA (SIMONS+16)}')
+
+ax[1].fill([sigma_high_redshift_redshift-0.05,
+      sigma_high_redshift_redshift+0.05,
+      sigma_high_redshift_redshift+0.05,
+      sigma_high_redshift_redshift-0.05],
+     [sigma_high_redshift_dyn_ratio_with_sigma_rot - sigma_high_redshift_dyn_ratio_with_sigma_lower_error_rot,
+      sigma_high_redshift_dyn_ratio_with_sigma_rot - sigma_high_redshift_dyn_ratio_with_sigma_lower_error_rot,
+      sigma_high_redshift_dyn_ratio_with_sigma_rot + sigma_high_redshift_dyn_ratio_with_sigma_upper_error_rot,
+      sigma_high_redshift_dyn_ratio_with_sigma_rot + sigma_high_redshift_dyn_ratio_with_sigma_upper_error_rot],
+     'red',
+      edgecolor='red',
+      lw=2,
+      alpha=0.25)
+
+ax[2].errorbar(sigma_high_redshift_redshift,
+            sigma_high_redshift_dyn_ratio_with_sigma_disp,
+            ecolor='red',
+            marker='H',
+            markersize=10,
+            markerfacecolor='red',
+            markeredgecolor='red',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{10.0 - SIGMA (SIMONS+16)}')
+
+ax[2].fill([sigma_high_redshift_redshift-0.05,
+      sigma_high_redshift_redshift+0.05,
+      sigma_high_redshift_redshift+0.05,
+      sigma_high_redshift_redshift-0.05],
+     [sigma_high_redshift_dyn_ratio_with_sigma_disp - sigma_high_redshift_dyn_ratio_with_sigma_lower_error_disp,
+      sigma_high_redshift_dyn_ratio_with_sigma_disp - sigma_high_redshift_dyn_ratio_with_sigma_lower_error_disp,
+      sigma_high_redshift_dyn_ratio_with_sigma_disp + sigma_high_redshift_dyn_ratio_with_sigma_upper_error_disp,
+      sigma_high_redshift_dyn_ratio_with_sigma_disp + sigma_high_redshift_dyn_ratio_with_sigma_upper_error_disp],
+     'red',
+      edgecolor='red',
+      lw=2,
+      alpha=0.25)
+
+ax[0].errorbar(amaze_redshift,
+            amaze_dyn_ratio_with_sigma_all,
+            ecolor='saddlebrown',
+            marker='D',
+            markersize=10,
+            markerfacecolor='saddlebrown',
+            markeredgecolor='saddlebrown',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{10.0 - AMAZE (Gnerucci+11)}')
+
+ax[0].fill([amaze_redshift-0.05,
+      amaze_redshift+0.05,
+      amaze_redshift+0.05,
+      amaze_redshift-0.05],
+     [amaze_dyn_ratio_with_sigma_all - amaze_dyn_ratio_with_sigma_lower_error_all,
+      amaze_dyn_ratio_with_sigma_all - amaze_dyn_ratio_with_sigma_lower_error_all,
+      amaze_dyn_ratio_with_sigma_all + amaze_dyn_ratio_with_sigma_upper_error_all,
+      amaze_dyn_ratio_with_sigma_all + amaze_dyn_ratio_with_sigma_upper_error_all],
+     'saddlebrown',
+      edgecolor='saddlebrown',
+      lw=2,
+      alpha=0.25)
+
+ax[1].errorbar(amaze_redshift,
+            amaze_dyn_ratio_with_sigma_rot,
+            ecolor='saddlebrown',
+            marker='D',
+            markersize=10,
+            markerfacecolor='saddlebrown',
+            markeredgecolor='saddlebrown',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{10.0 - AMAZE (Gnerucci+11)}')
+
+ax[1].fill([amaze_redshift-0.05,
+      amaze_redshift+0.05,
+      amaze_redshift+0.05,
+      amaze_redshift-0.05],
+     [amaze_dyn_ratio_with_sigma_rot - amaze_dyn_ratio_with_sigma_lower_error_rot,
+      amaze_dyn_ratio_with_sigma_rot - amaze_dyn_ratio_with_sigma_lower_error_rot,
+      amaze_dyn_ratio_with_sigma_rot + amaze_dyn_ratio_with_sigma_upper_error_rot,
+      amaze_dyn_ratio_with_sigma_rot + amaze_dyn_ratio_with_sigma_upper_error_rot],
+     'saddlebrown',
+      edgecolor='saddlebrown',
+      lw=2,
+      alpha=0.25)
+
+ax[0].errorbar(kds_redshift,
+            kds_dyn_ratio_with_sigma_all,
+            ecolor='firebrick',
+            marker='o',
+            markersize=16,
+            markerfacecolor='firebrick',
+            markeredgecolor='firebrick',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{9.8 - KDS (This study)}')
+
+ax[0].fill([kds_redshift-0.05,
+      kds_redshift+0.05,
+      kds_redshift+0.05,
+      kds_redshift-0.05],
+     [kds_dyn_ratio_with_sigma_all - kds_dyn_ratio_with_sigma_lower_error_all,
+      kds_dyn_ratio_with_sigma_all - kds_dyn_ratio_with_sigma_lower_error_all,
+      kds_dyn_ratio_with_sigma_all + kds_dyn_ratio_with_sigma_upper_error_all,
+      kds_dyn_ratio_with_sigma_all + kds_dyn_ratio_with_sigma_upper_error_all],
+     'firebrick',
+      edgecolor='firebrick',
+      lw=2,
+      alpha=0.25)
+
+ax[1].errorbar(kds_redshift,
+            kds_dyn_ratio_with_sigma_rot,
+            ecolor='firebrick',
+            marker='o',
+            markersize=16,
+            markerfacecolor='firebrick',
+            markeredgecolor='firebrick',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{9.8 - KDS (This study)}')
+
+ax[1].fill([kds_redshift-0.05,
+      kds_redshift+0.05,
+      kds_redshift+0.05,
+      kds_redshift-0.05],
+     [kds_dyn_ratio_with_sigma_rot - kds_dyn_ratio_with_sigma_lower_error_rot,
+      kds_dyn_ratio_with_sigma_rot - kds_dyn_ratio_with_sigma_lower_error_rot,
+      kds_dyn_ratio_with_sigma_rot + kds_dyn_ratio_with_sigma_upper_error_rot,
+      kds_dyn_ratio_with_sigma_rot + kds_dyn_ratio_with_sigma_upper_error_rot],
+     'firebrick',
+      edgecolor='firebrick',
+      lw=2,
+      alpha=0.25)
+
+ax[2].errorbar(kds_redshift,
+            kds_dyn_ratio_with_sigma_disp,
+            ecolor='firebrick',
+            marker='o',
+            markersize=16,
+            markerfacecolor='firebrick',
+            markeredgecolor='firebrick',
+            markeredgewidth=2,
+            capsize=2,
+            elinewidth=2,
+            label=r'\textbf{9.8 - KDS (This study)}')
+
+ax[2].fill([kds_redshift-0.05,
+      kds_redshift+0.05,
+      kds_redshift+0.05,
+      kds_redshift-0.05],
+     [kds_dyn_ratio_with_sigma_disp - kds_dyn_ratio_with_sigma_lower_error_disp,
+      kds_dyn_ratio_with_sigma_disp - kds_dyn_ratio_with_sigma_lower_error_disp,
+      kds_dyn_ratio_with_sigma_disp + kds_dyn_ratio_with_sigma_upper_error_disp,
+      kds_dyn_ratio_with_sigma_disp + kds_dyn_ratio_with_sigma_upper_error_disp],
+     'firebrick',
+      edgecolor='firebrick',
+      lw=2,
+      alpha=0.25)
+
+# split legend for the full samples
+all_legend = []
+all_legend.append([p1_all,p2_all,p3_all,p4_all,p5_all])
+legend1 = ax[0].legend(all_legend[0],
+                    [r'\textbf{10.3 - DYNAMO (Green+14)}',
+                     r'\textbf{9.4 - MKS (Swinbank+17)}',
+                     r'\textbf{9.9 - KROSS (Harrison+17)}',
+                     r'\textbf{10.2 - MASSIV (Epinat+12)}',
+                     r'\textbf{9.8 - MKS (Swinbank+17)}'],
+                    loc=('lower left'),
+                    prop={'size':11,'weight':'bold'},
+                    frameon=False,
+                    markerscale=0.75,
+                    numpoints=1)
+ax[0].add_artist(legend1)
+ax[0].legend(loc='lower right',
+          prop={'size':11,'weight':'bold'},
+          frameon=False,
+          markerscale=0.75,
+          numpoints=1)
+
+# split legend for rotation dominated galaxies
+rot_legend = []
+rot_legend.append([p1_rot,p2_rot,p3_rot,p4_rot,p5_rot])
+legend2 = ax[1].legend(rot_legend[0],
+                    [r'\textbf{10.3 - DYNAMO (Green+14)}',
+                     r'\textbf{9.4 - MKS (Swinbank+17)}',
+                     r'\textbf{9.9 - KROSS (Harrison+17)}',
+                     r'\textbf{10.2 - MASSIV (Epinat+12)}',
+                     r'\textbf{9.8 - MKS (Swinbank+17)}'],
+                    loc=('lower left'),
+                    prop={'size':11,'weight':'bold'},
+                    frameon=False,
+                    markerscale=0.75,
+                    numpoints=1)
+ax[1].add_artist(legend2)
+ax[1].legend(loc='lower right',
+          prop={'size':11,'weight':'bold'},
+          frameon=False,
+          markerscale=0.75,
+          numpoints=1)
+
+# split legend for dispersion dominated galaxies
+disp_legend = []
+disp_legend.append([p1_disp,p2_disp,p3_disp,p4_disp])
+legend3 = ax[2].legend(disp_legend[0],
+                    [r'\textbf{9.4 - MKS (Swinbank+17)}',
+                     r'\textbf{9.9 - KROSS (Harrison+17)}',
+                     r'\textbf{10.2 - MASSIV (Epinat+12)}',
+                     r'\textbf{9.8 - MKS (Swinbank+17)}'],
+                    loc=('lower left'),
+                    prop={'size':11,'weight':'bold'},
+                    frameon=False,
+                    markerscale=0.75,
+                    numpoints=1)
+ax[2].add_artist(legend3)
+ax[2].legend(loc='lower right',
+          prop={'size':11,'weight':'bold'},
+          frameon=False,
+          markerscale=0.75,
+          numpoints=1)
+
+fig.tight_layout()
+fig.subplots_adjust(wspace=0)
+plt.show()
+fig.savefig('/disk2/turner/disk1/turner/DATA/kmos_dynamics_paper_plots/PAPER_2_PLOTS/dyn_mass_with_sigma_evolution.png')
 plt.close('all')
